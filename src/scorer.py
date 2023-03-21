@@ -51,7 +51,7 @@ pH = 7.4
 receptor = os.path.join(PACKAGEDATAPATH, "protein", "pabb_model1.pdbqt")
 ligands = os.path.join(DATAPATH, "smiles", "merged.sdf")
 logfile = os.path.join(RESULTSPATH, "outputs", "log.txt")
-#docking_output = os.path.join(RESULTSPATH, "outputs", "outputs.sdf")
+docking_output = os.path.join(RESULTSPATH, "outputs", "outputs.sdf")
 smina = os.path.join(SOURCEPATH, "smina.static")
 
 
@@ -101,8 +101,8 @@ def prep_smiles(smiles_csv):
 
     df["mol_wt"] = mol_wts
 
-    df_filtered = df[df["mol_wt"] >= 300]
-    df_filtered = df_filtered[df_filtered["mol_wt"] <= 800]
+    df_filtered = df[df["mol_wt"] >= 250]
+    df_filtered = df_filtered[df_filtered["mol_wt"] <= 500]
     df_filtered.drop(columns=["mol_wt"], inplace=True)
     df_filtered.to_csv(filtered_std_smiles, index=False)
 
