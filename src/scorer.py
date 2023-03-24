@@ -4,10 +4,8 @@ import sys
 import pandas as pd
 import numpy as np
 from rdkit import Chem
-from rdkit.Chem import AllChem
+from rdkit.Chem import AllChem, PandasTools, Descriptors
 from rdkit.Chem.rdmolfiles import MolToPDBFile
-from rdkit.Chem import PandasTools
-from rdkit.Chem import Descriptors
 from standardiser import standardise
 import subprocess
 import shutil
@@ -101,8 +99,7 @@ def prep_smiles(smiles_csv):
 
     df["mol_wt"] = mol_wts
 
-    df_filtered = df[df["mol_wt"] >= 250]
-    df_filtered = df_filtered[df_filtered["mol_wt"] <= 500]
+    df_filtered = df[df["mol_wt"].between(250, 450)]
     df_filtered.drop(columns=["mol_wt"], inplace=True)
     df_filtered.to_csv(filtered_std_smiles, index=False)
 
@@ -114,8 +111,8 @@ def prepare_ligands_sdf(
 
     print(filtered_std_smiles)
 
-    with open(filtered_std_smiles, "r") as csv:
-        for entry in csv.readlines()[header_len:]:
+    with open(filtered_std_smiles, "r") as csv_file:
+        for entry in csv_file.readlines()[header_len:]:
             ID, ST_SMILES = entry.split(delim)[:2]
 
             # Convert smiles str to 3D coordinates
