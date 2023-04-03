@@ -1,5 +1,5 @@
 *.csv filter=lfs diff=lfs merge=lfs -text
-data/200k_reference_output/results/outputs/docking-poses.sdf filter=lfs diff=lfs merge=lfs -text
+data/reference_output_2/docking-poses.sdf filter=lfs diff=lfs merge=lfs -text
 data/200k_reference_output/docking-poses.sdf filter=lfs diff=lfs merge=lfs -text
 
 
